@@ -1,6 +1,6 @@
 <div class="content-wrapper ">
   <table class="table table-striped ">
-    <thead style="color:navy;">
+    <thead class="table-dark" ,style="color:navy;">
       <tr>
         <th scope="col">Department Id</th>
         <th scope="col">Department Name</th>
@@ -8,10 +8,10 @@
       </tr>
     </thead>
     <% @departments.each do |department|%>
-      <tr>
+      <tr class="table-default">
         <th><%= department.id %></th>
         <th><%= department.name%></th>
-        <th><%= link_to   (department.employee_ids)%></th>
+        <th><%=department.employee_ids%></th>
       </tr>
     <%end%>
   </table>

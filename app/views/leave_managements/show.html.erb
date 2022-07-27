@@ -1,6 +1,7 @@
 <div class= "content-wrapper">
   <table class="table table-user-information">
-    <thead>
+  <center><h1 style="color:red;"><%=current_user.name%> Leave-list</h1></center>
+    <thead  class="table-dark", style="color:green;" >
       <th>leave type</th>
       <th>leave Unit</th>
       <th>reason</th>
@@ -8,16 +9,18 @@
       <th>Date end</th>
       <th>Status</th>
     </thead>
-    <tbody>
+    <tbody  class="table-info">
+    <% @leave_managements.each do |l|%>
       <tr>
-        <td><%= @leave_management.leave_type %></td>
-        <td><%= @leave_management.leave_unit %></td>
-        <td><%= @leave_management.reason %></td>
-        <td><%= @leave_management.start_date %></td>
-        <td><%= @leave_management.end_date %></td>
-        <td><%= @leave_management.status %></td>
+        <td><%= l.leave_type %></td>
+        <td><%= l.leave_unit %></td>
+        <td><%= l.reason %></td>
+        <td><%= l.start_date %></td>
+        <td><%= l.end_date %></td>
+        <td style="color:orange;"><%= l.status %></td>
         
       </tr>
+      <%end%>
     </tbody>
   </table>
 </div>

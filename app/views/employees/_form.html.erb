@@ -5,31 +5,37 @@
     <!--  General -->
     <div class="form-group">
       <h2 class="text-center">Employee Detail Form</h2>
+       <%=f.label :Employee_Id %>
       <div class="controls">
         <%= f.text_field :employee_id,placeholder: "Employee_id" %>
       </div>
+        <%= f.label :Date_of_Birth%>
+
       <div class="controls">
-        <%=f.label :Date_of_Birth%>
-        <%= f.date_field :date_of_birth %>
+        <%= f.date_field :date_of_birth,min: Date.new(1975, 07, 03),max: Date.today ,placeholder:"dob"%>
       </div>
+       <%=f.label :Mobile_no%>
       <div class="controls">
         <%= f.text_field :mobile,placeholder: "Mobile No" %>
       </div>
+       <%=f.label :Gender%>
       <div class="controls">
         <%= f.select(:gender , options_for_select([['Male', 'M'], ['Female', 'F']]), {:prompt => 'Select Gender', :selected => f})%>
       </div>
+      <%=f.label :Date_of_Joining%>
       <div class="controls">
-        <%=f.label :Date_of_Joining%>
-        <%= f.date_field :date_of_join   %>
+        <%= f.date_field :date_of_join ,max: Date.today%>
       </div>
+       <%=f.label :City%>
       <div class="controls">
         <%= f.text_field :city,placeholder: "City" %>
       </div>
+       <%=f.label :Choose_designation%>
       <div class="controls">
         <%= f.select(:designation , options_for_select([['Intern'], ['Assosiate '],['Senior Developer'],['Project manager']]), {:prompt => 'Select Designation', :selected => f})%>
       </div>
       <div>
-        <button type="submit" value="Submit" class="col-1-4">Submit</button>
+        <%=f.submit "Submit Your Detail"%>
       </div>
     </div>
     <!--  Details -->

@@ -16,7 +16,8 @@ consumer.subscriptions.create("ChatroomChannel", {
    
     // $("#usersTable").prepend("<%=escape_javascript render('user_row',user:@user)%>");
 
-   $("#message-container").append(data.mod_message)
+   $("#message-container").append(data.mod_message);
+   $("#chat-text").val("");
     // Called when there's incoming data on the websocket for this channel
   }
 }); 

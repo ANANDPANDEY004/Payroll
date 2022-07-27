@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag 'employee' %>
 <div class="content-wrapper">
   <table class="table table-striped ">
-    <thead style="color:navy;">
+    <thead class="table-dark"style="color:white;">
       <tr>
         <th scope="col">Employee Id</th>
         <th scope="col">Name</th>
@@ -10,9 +10,13 @@
         <th scope="col">Date of Joining</th>
         <th scope="col">Mobile </th>
         <th scope="col">Designation</th>
+        <%if current_user.admin?%>
+          <th scope="col">Status</th>
+        <%end%>
+        <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody  class="table-">
       <% @employees.each do |employee|%>
         <tr>
           <th><%= employee.employee_id %></th>
@@ -22,17 +26,49 @@
           <th><%= employee.date_of_join %></th>
           <th><%= employee.mobile %></th>
           <th><%= employee.designation %></th>
-
-        </tr>
-      <%end%>
-    </tbody>
-  </table>
-  <div class="menu list-view pmd-floating-action" role="navigation" >
-  <a class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" data-title="Add Employee" href = "employees/new.html" style="height: 50px;
-  width: 50px;
-  border-radius: 50%; margin-left:1350px">
-  <i class="material-icons pmd-sm text-bold text-justify">+</i>
-  </a>
-
+          <%if current_user.admin?%>
+            <th>
+              <%= form_with(model: employee, local: true) do |form| %>
+                <div class="custom-control custom-switch">
+                  <%= form.check_box :is_active, class: "custom-control-input", id: "customSwitch1"   %>
+                  <label class="custom-control-label" for="customSwitch1"></label>
+                  <%= form.submit "save"%>
+                </div>
+                <%# <label class="switch switch-primary">
+                <%= form.text_field :is_active, label: false, as: :boolean, class: 'form-control' %>
+                <%# <span></span> %>
+                <%# </label> %>
+              <% end %>
+              <%# <% if employee.is_active?%>
+              <%# <%= button_to "Deactivate" ,employees_path(employee)%>
+              <%# <% else %>
+              <%# <%= button_to "Active"%>
+              <%# <% end %>
+              <%# <%= employee.is_active ?  "Active" : "Inactive"%>
+              <%# <%= form_tag(model:@employees ) do %>
+                <%# <%= select_tag(:is_active, options_for_select([['Active', true], ['Inactive', false]], params[:is_active]), :prompt => 'Status') %>
+                <%# <%= submit_tag("Submit") %>
+                <%# <% end %>
+              </th>
+            <%end%>
+            <th class = "check" , style="display:flex;">
+              <%= button_to "Show", employee_path(employee),  method: :get,class: "btn btn-outline-info" %>
+              <%if current_user.admin?%>
+                <%= link_to "Edit", edit_employee_path(employee), class: "btn btn-outline-primary" %>
+                <%= button_to "Delete", employee_path(employee), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+              <%end%>
+            </th>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+    <%if current_user.admin?%>
+      <div class="menu list-view pmd-floating-action" role="navigation" >
+        <a class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" data-title="Add Employee" href = "employees/new.html" style="height: 50px;
+                width: 50px;
+                border-radius: 50%; margin-left:1350px">
+          <i class="material-icons pmd-sm text-bold text-justify">+</i>
+        </a>
+      </div>
+    <%end%>
   </div>
-</div>
