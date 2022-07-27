@@ -9,6 +9,7 @@ class LeaveManagementsController < ApplicationController
 
   def show
     # @leave_management = LeaveManagement.find(params[:id])
+    @leave_managements = current_user.leave_managements.all
   end
 
   def new

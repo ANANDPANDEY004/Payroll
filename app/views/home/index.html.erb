@@ -10,58 +10,64 @@
       </div>
     </div>
   </div>
-  <section class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-3 col-6">
-          <div class="small-box bg-info">
-            <div class="inner">
-              <p>Total User</p>
-              <h3> <%= User.count%></h3>
+  <%if current_user.admin? || current_user.hr?%>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+              <div class="inner">
+                <p>Total User</p>
+                <h3> <%= User.count%></h3>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-left"></i></a>
             </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-left"></i></a>
           </div>
-        </div>
-        <div class="col-lg-3 col-6">
-          <div class="small-box bg-success">
-            <div class="inner">
-              <h3><%=Employee.count%><sup style="font-size: 20px"></sup></h3>
-              <p>Total Employee</p>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><%=Employee.count%><sup style="font-size: 20px"></sup></h3>
+                <p>Total Employee</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
-        </div>
-        <div class="col-lg-3 col-6">
-          <div class="small-box bg-warning">
-            <div class="inner">
-              <h3><%=Department.count%></h3>
-              <p>Total Department</p>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3><%=Department.count%></h3>
+                <p>Total Department</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
-        </div>
-        <div class="col-lg-3 col-6">
-          <div class="small-box bg-danger">
-            <div class="inner">
-              <h3><%=(Attandance.where("created_at >= ?", Time.zone.now.beginning_of_day)).count%></h3>
-              <p>Total present employee</p>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3><%=(Attandance.where("in_time>= ?", Time.zone.now.beginning_of_day)).count%></h3>
+                <p>Total present employee</p>
+              </div>
+              <div class="icon">
+                <i class="icon icon-pie-graph"></i>
+              </div>
+              <div href="attandances_path" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
             </div>
-            <div class="icon">
-              <i class="icon icon-pie-graph"></i>
-            </div>
-            <div href="attandances_path" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  <%else%>
+    <body>
+      Hii
+    </body>
+  <%end%>
 </div>

@@ -32,13 +32,22 @@
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>employee
               <% if user_signed_in?%>
-                <%if current_user.role == 'admin'|| current_user.role == 'hr' %>
+                <%if current_user.admin?|| current_user.hr? %>
                   <li class="dropdown-item"><%= link_to "Employee List", employees_path  %></li>
                   <li class="dropdown-item"><%= link_to "Employees Attandance", attandances_path %></li>
                 <%end %>
-                <li class="dropdown-item" ><%= link_to "Mark Attandance",new_attandance_path%></li>
-                <li class="dropdown-item" ><%= link_to "Add Employee", new_employee_path %></li>
-                <li class="dropdown-item" ><%= link_to "Apply For leave",  new_leave_management_path%></li>
+                <%if current_user.admin? %>
+                  <li class="dropdown-item"><%link_to "Employees Attandance", attandances_path %></li>
+                <%else%>
+                  <li class="dropdown-item" ><%= link_to "Mark Attandance",new_attandance_path%></li>
+                <%end%>
+                <%if current_user.employee.nil? %>
+                  <li class="dropdown-item" ><%= link_to "Employee Form", new_employee_path %></li>
+                <%end%>
+                <% if current_user.leave_management_ids.present?%>
+                  <li class="dropdown-item" ><%= link_to "Apply For leave",  new_leave_management_path%></li>
+                  <li class="dropdown-item" ><%= link_to "Leave-Status", leave_management_path((current_user.leave_management_ids))%></li>
+                <%end%>
               <%end%>
             </p>
           </a>
@@ -47,53 +56,53 @@
           <a class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-              Department
+              Department</p>
+            <% if user_signed_in?%>
+              <%if current_user.admin?|| current_user.hr? %>
+                <li class="dropdown-item"><%=link_to "Department List", departments_index_path%></li>
+              <%end%>
+            <%end%>
+          </a>
+        </li>
+        <li class="nav-item has-treeview menu-open">
+          <a class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              LeaveManagement
               <% if user_signed_in?%>
-                <%if current_user.role == 'admin'|| current_user.role == 'hr' %>
-                  <li class="dropdown-item"><%=link_to "Department List", departments_index_path%></li>
+                <%if current_user.admin?||current_user.hr? %>
+                  <li class="dropdown-item"><%=link_to "Leave Report ", leave_managements_path%></li>
+                  <li class="dropdown-item"><%=link_to "Leave "%></li>
                 <%end%>
               <%end%>
-            </a>
-          </li>
-          <li class="nav-item has-treeview menu-open">
-            <a class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                LeaveManagement
-                <% if user_signed_in?%>
-                  <%if current_user.role == 'hr' %>
-                    <li class="dropdown-item"><%=link_to "Leave Report ", leave_managements_path%></li>
-                    <li class="dropdown-item"><%=link_to "Leave "%></li>
-                  <%end%>
-                <%end%>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <div  class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <%=link_to "Widgets", widget_path%>
-            </div>
-          </li>
-             <li class="nav-item">
-            <div  class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <%= link_to "Chat", chatroom_index_path%>
-            </div>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Layout Options
-                <%# <i class="fas fa-angle-left right"></i> %>
-              </p>
-            </a>
-          </ul>
+            </p>
+          </a>
         </li>
-      </ul>
-    </nav>
-    <!-- /.sidebar-menu -->
-  </div>
-  <!-- /.sidebar -->
+        <li class="nav-item">
+          <div  class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <%=link_to "Widgets", widget_path%>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div  class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <%= link_to "Chat", chatroom_index_path%>
+          </div>
+        </li>
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-copy"></i>
+            <p>
+              Layout Options
+              <%# <i class="fas fa-angle-left right"></i> %>
+            </p>
+          </a>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
 </aside>

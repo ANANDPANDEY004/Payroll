@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     post "/decline", to: "leave_managements#decline"
   end
   get 'departments/index'
-  resources :employees
+  resources :employees do
+    post "/active", to: "employees#actice"
+  end
   resources :hrs
   devise_for :users
   root 'home#index'

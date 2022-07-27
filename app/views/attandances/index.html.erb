@@ -1,16 +1,16 @@
 <div class="content-wrapper">
-  <table class="table table-striped">
-    <thead style="color:Green;" >
+  <table class="table table-striped table-dark">
+    <thead style="color:yellow;" >
       <th>Employee id</th>
       <th>Check in Time</th>
       <th>Check out Time</th>
     </thead>
     <tbody>
     <%@attandances.each do |attand|%>
-    <tr>
-    <th><%= attand.user.employee.employee_id %></th>
-    <th><%= attand.in_time%></th>
-    <th><%= attand.out_time%></th>
+    <tr class="table-info">
+    <th ><%= attand.user.employee.employee_id %></th>
+    <th style="color:green;"><%= attand.in_time%></th>
+    <th style="color:red;"><%= attand.out_time%></th>
     <%end%>
     </tr>
     </tbody>

@@ -1,6 +1,6 @@
 <div class= "content-wrapper">
-  <table class="table table-striped">
-    <thead style="color:red;" >
+  <table class="table ">
+    <thead class="table-dark", style="color:red;" >
       <th>Employee id</th>
       <th>Leave Type</th>
       <th>leave Unit</th>
@@ -10,7 +10,7 @@
       <th> status</th>
       <th>Action for Approval</th>
     </thead>
-    <tbody>
+    <tbody  class="table-light">
       <% @leave_managements.each do |lm|%>
         <tr>
           <th><%= lm.user.employee.employee_id %></th>
@@ -19,7 +19,7 @@
           <th><%= lm.reason %></th>
           <th><%= lm.start_date %></th>
           <th><%= lm.end_date %></th>
-          <th><%= lm.status %></th>
+          <th class="color-white"><%= lm.status %></th>
           <% if lm.status == "pending"%>
             <th>
               <div class="approval">
